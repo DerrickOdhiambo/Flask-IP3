@@ -33,3 +33,16 @@ body {
   font-family: 'Molle', cursive;
   color: #5a5c4f;
 }
+.account-img {
+  height: 150px;
+  width: 150px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+.content-section {
+  background: #5a5c4f;
+  padding: 10px 20px;
+  border-radius: 3px;
+  color: #d3d6c3;
+  margin-bottom: 20px;
+}
