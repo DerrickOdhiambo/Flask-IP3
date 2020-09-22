@@ -1,7 +1,7 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, abort
 from app import app, db, bcrypt
 from app.form import RegistrationForm, LoginForm, AccountUpdateForm, PostForm
 from app.models import User,Post
@@ -96,4 +96,39 @@ def new_post():
     db.session.commit()
     flash('Your pitch has been created!', 'success')
     return redirect(url_for('home'))
-  return render_template('new_post.html', title = 'New Post', form = form)
+  return render_template('new_post.html', title = 'New Pitch', form = form, legend='New Pitch')
+
+@app.route('/post/<int:post_id>')
+def post(post_id):
+  post = Post.query.get(post_id)
+  return render_template('post.html', title = post.category, post = post)
+
+@app.route('/post/<int:post_id>/update', methods=['GET','POST'])
+@login_required
+def update_post(post_id):
+  post = Post.query.get(post_id)
+  if post.author != current_user:
+    abort(403)
+  form = PostForm()
+  if form.validate_on_submit():
+    post.category = form.category.data
+    post.content = form.content.data
+    db.session.commit()
+    flash('Your pitch has been updated!', 'success')
+    return redirect(url_for('post', post_id=post.id))
+  elif request.method == 'GET':
+    form.category.data = post.category
+    form.content.data = post.content
+  return render_template('new_post.html', title='Update Pitch', form=form, legend='Update Pitch')
+
+
+@app.route('/post/<int:post_id>/delete', methods=['POST'])
+@login_required
+def delete_post(post_id):
+  post = Post.query.get(post_id)
+  if post.author != current_user:
+    abort(403)
+  db.session.delete(post)
+  db.session.commit()
+  flash('Your post has been deleted!', 'success')
+  return redirect(url_for('home'))
