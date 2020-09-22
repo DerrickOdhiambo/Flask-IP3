@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    {% for post in posts %}
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <p>Posted by {{ post.author.username }} on <small
+              class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small></p>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ post.category }}</h5>
+          <p class="card-text">{{ post.content }}</p>
+        </div>
+        <div class="card-footer">
+          <h6><a href="">Comment</a></h6>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
