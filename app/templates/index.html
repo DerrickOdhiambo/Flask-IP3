@@ -14,7 +14,7 @@
           <p class="card-text">{{ post.content }}</p>
         </div>
         <div class="card-footer">
-          <h6><a href="">Comment</a></h6>
+          <h6><a href="{{ url_for('post', post_id=post.id) }}">Comment</a></h6>
         </div>
       </div>
     </div>
