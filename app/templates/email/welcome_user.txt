@@ -1,0 +1,3 @@
+Hello {{ user.username }}
+Welcome to Pitch-Away!
+Feel free to create as many pitches as you can!
