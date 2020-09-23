@@ -4,6 +4,7 @@ from app import db, bcrypt
 from app.models import User, Post
 from app.users.forms import RegistrationForm, LoginForm, AccountUpdateForm, RequestResetForm, ResetPasswordForm
 from app.users.utilities import save_pic, send_reset_email
+from ..email import mail_message
 
 users = Blueprint('users', __name__)
 
@@ -34,6 +35,9 @@ def register():
     user = User(username = form.username.data, email = form.email.data, password = hashed_password)
     db.session.add(user)
     db.session.commit()
+
+    mail_message("Welcome to watchlist","email/welcome_user",user.email,user=user)
+
     flash(f'Account for was created successfully! You can now log into your account!','success') 
     return redirect(url_for('users.login'))
   return render_template('register.html', title = 'Register', form = form)
@@ -102,5 +106,6 @@ def reset_token(token):
     flash(f'Password reset successful. You can now log in!','success') 
     return redirect(url_for('users.login'))
   return render_template('reset_token.html', form=form, title='Reset Password')
+
 
 
