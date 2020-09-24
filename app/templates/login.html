@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="content-section">
+<div class="container content-section">
   <form action="" method="POST">
     {{ form.hidden_tag() }}
     <fieldset class="form-group">
@@ -42,12 +42,12 @@
         <a href="{{ url_for('users.reset_request') }}">Forgot Password?</a>
       </small>
     </div>
+    <div class="border-top pt-3">
+      <small class="text-muted">
+        Do you need an account?
+        <a class="ml-2" href="{{ url_for('users.register') }}">Sign Up Today</a>
+      </small>
+    </div>
   </form>
-</div>
-<div class="border-top pt-3">
-  <small class="text-muted">
-    Do you need an account?
-    <a class="ml-2" href="{{ url_for('users.register') }}">Sign Up Today</a>
-  </small>
 </div>
 {% endblock %}

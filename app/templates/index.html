@@ -1,6 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="landing-page">
+  <div class="overlay">
+    <ul>
+      <li><a href="{{url_for('main.post_by_category',category='Career')}}">Career</a></li>
+      <li><a href="{{url_for('main.post_by_category',category='PickUp Lines')}}">Pick Up line</a></li>
+      <li><a href="{{url_for('main.post_by_category',category='Slogan')}}">Slogans</a></li>
+      <li><a href="{{url_for('main.post_by_category',category='Product')}}">Product</a></li>
+      <br><br><br>
+      <div class="landing-page-content pt-3">
+        <h1>“Creativity is nothing but <br> <span>the way to solve new problems."</span></h1>
+        {%if current_user.is_authenticated %}
+        <p class="text-uppercase mt-2"><a href="{{ url_for('posts.new_post') }}">Create Pitch</a></p>
+        {% else %}
+        <p class="text-uppercase mt-2"><a href="{{ url_for('users.register') }}">Get Started</a></p>
+        {% endif %}
+      </div>
+    </ul>
+  </div>
+
+</div>
 <div class="container">
+  <h2 class="text-center text-warning pt-3">Pitches</h2>
   <div class="row">
     {% for post in posts %}
     <div class="col-md-6">
@@ -11,7 +32,7 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">{{ post.category }}</h5>
-          <p class="card-text">{{ post.content }}</p>
+          <h5 class="card-text"><a href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.content }}</a></5>
         </div>
         <div class="card-footer">
           <h6><a href="{{ url_for('posts.comment_post', post_id=post.id) }}">Comment</a></h6>
