@@ -110,6 +110,8 @@ body {
 }
 .card{
   margin: 20px;
+  box-shadow: 10px 7px 5px 0px rgba(242,175,29,1);
+
 }
 .card-body {
   background-color: #f2af1d;
@@ -123,6 +125,7 @@ body {
 }
 .card a:hover{
   text-decoration: none;
+  color: #424239;
 }
 .collapse a i {
   margin-right: 3px;
@@ -136,4 +139,7 @@ body {
 }
 .card-body p{
   color: #5a5c4f;
+}
+.card-header a, .card-footer a{
+  color: #080807;
 }
