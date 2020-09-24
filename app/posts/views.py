@@ -62,7 +62,7 @@ def delete_post(post_id):
 def comment_post(post_id):
   post = Post.query.get(post_id)
   form = CommentForm()
-  comments = Comments(text=form.text.data, author=current_user)
+  comments = Comments(text=form.text.data)
   if request.method == 'POST':
     db.session.add(post)
     db.session.commit()
