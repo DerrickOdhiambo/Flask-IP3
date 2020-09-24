@@ -14,9 +14,10 @@ class PostTest(unittest.TestCase):
         self.new_comment = Comments(text='This is good', user=self.user_Derrick )
 
     def tearDown(self):
-        Post.query.delete()
-        User.query.delete()
         Comments.query.delete()
+        Post.query.delete()
+        User.query.delete() 
+
 
     def test_instance(self):
         self.assertTrue(isinstance(self.post, Post))
