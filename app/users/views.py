@@ -36,7 +36,7 @@ def register():
     db.session.add(user)
     db.session.commit()
 
-    mail_message("Welcome to watchlist","email/welcome_user",user.email,user=user)
+    mail_message("Welcome to Pitch-Away","email/welcome_user",user.email,user=user)
 
     flash(f'Account for was created successfully! You can now log into your account!','success') 
     return redirect(url_for('users.login'))
